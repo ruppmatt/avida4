@@ -2,24 +2,29 @@
 *.slo
 *.lo
 *.o
-*.obj
 
 # Compiled Dynamic libraries
 *.so
-*.dylib
-*.dll
 
 # Compiled Static libraries
 *.lai
 *.la
 *.a
-*.lib
+*.js
+*.map
 
-# Executables
-*.exe
-*.out
-*.app
-xcuserdata
-DerivedData
-bin
+# ignore tmp/build directories
+*.swp
 tmp
+bin
+dist
+DerivedData
+
+# ignore os x / xcode metadata:
+.DS_Store
+xcuserdata
+**/*.xccheckout
+
+# ignore output from ealib:
+checkpoint-*
+*.dat
