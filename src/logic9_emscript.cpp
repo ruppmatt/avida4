@@ -37,9 +37,9 @@
 using namespace ealib;
 
 
-/*! In emscripten world, it's a bit of a pain to use third-party libraries.
- (At least, until there's a bjam toolchaing for it.)  So, we're going to eliminate
- the dependencies on the Boost libraries.
+/*! In the emscripten world, it's a bit of a pain to use third-party libraries.
+ (At least, until there's a bjam toolchain for it.)  As a result, this version
+ of Logic9 has no dependencies on the Boost libraries.
  */
 int main(int argc, char* argv[]) {
     using namespace std;

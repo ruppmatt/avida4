@@ -2,6 +2,7 @@
 *.slo
 *.lo
 *.o
+*.pyc
 
 # Compiled Dynamic libraries
 *.so
@@ -15,6 +16,7 @@
 
 # ignore tmp/build directories
 *.swp
+*~
 tmp
 bin
 dist
