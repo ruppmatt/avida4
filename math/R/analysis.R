@@ -38,3 +38,30 @@ load.files <- function(file_pattern, dir_pattern=".*", path="./", tag=TRUE, ...)
 		}
 	)))
 }
+
+dominant <- function(D) {
+	D[which.max(D$max_fitness),]
+}
+
+STYLE="draft" # or "final"
+WIDTH=6
+HEIGHT=3.75
+
+quick_theme <- theme_bw() + theme(panel.border=element_blank(), axis.line=element_line(colour = "black",size=0.75), legend.title=element_blank(), legend.justification=c(1,0), legend.position=c(1,0), text=element_text(size=14))
+
+
+# Show figure x.
+#
+showfig <- function(x) {
+	quartz(width=WIDTH, height=HEIGHT)
+	print(x)
+}
+
+# Save figure x in in PDF format.
+#
+savefig <- function(x, name, width=WIDTH, height=HEIGHT) {
+	f = paste(figpath,name,".pdf",sep="")
+	pdf(file=f, width=width, height=height, family="Helvetica")
+	print(x)
+	dev.off()
+}
