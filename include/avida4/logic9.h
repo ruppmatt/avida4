@@ -73,15 +73,15 @@ struct lifecycle : public default_lifecycle {
         task_ptr_type task_equals = make_task<tasks::task_equals,catalysts::additive<4> >("equals", ea);
         
         // resources:
-        resource_ptr_type resA = make_resource("resA", 0.1, 100.0, 1.0, 0.01, 0.05, ea);
-        resource_ptr_type resB = make_resource("resB", 100.0, 1.0, 0.01, 0.05, ea);
-        resource_ptr_type resC = make_resource("resC", 100.0, 1.0, 0.01, 0.05, ea);
-        resource_ptr_type resD = make_resource("resD", 100.0, 1.0, 0.01, 0.05, ea);
-        resource_ptr_type resE = make_resource("resE", 100.0, 1.0, 0.01, 0.05, ea);
-        resource_ptr_type resF = make_resource("resF", 100.0, 1.0, 0.01, 0.05, ea);
-        resource_ptr_type resG = make_resource("resG", 100.0, 1.0, 0.01, 0.05, ea);
-        resource_ptr_type resH = make_resource("resH", 100.0, 1.0, 0.01, 0.05, ea);
-        resource_ptr_type resI = make_resource("resI", 100.0, 1.0, 0.01, 0.05, ea);
+        resource_ptr_type resA = make_resource("resA", ea);//, 0.1, 100.0, 1.0, 0.01, 0.05, ea);
+        resource_ptr_type resB = make_resource("resB", ea);//, 100.0, 1.0, 0.01, 0.05, ea);
+        resource_ptr_type resC = make_resource("resC", ea);//, 100.0, 1.0, 0.01, 0.05, ea);
+        resource_ptr_type resD = make_resource("resD", ea);//, 100.0, 1.0, 0.01, 0.05, ea);
+        resource_ptr_type resE = make_resource("resE", ea);//, 100.0, 1.0, 0.01, 0.05, ea);
+        resource_ptr_type resF = make_resource("resF", ea);//, 100.0, 1.0, 0.01, 0.05, ea);
+        resource_ptr_type resG = make_resource("resG", ea);//, 100.0, 1.0, 0.01, 0.05, ea);
+        resource_ptr_type resH = make_resource("resH", ea);//, 100.0, 1.0, 0.01, 0.05, ea);
+        resource_ptr_type resI = make_resource("resI", ea);//, 100.0, 1.0, 0.01, 0.05, ea);
 
         task_not->consumes(resA);
         task_nand->consumes(resB);
