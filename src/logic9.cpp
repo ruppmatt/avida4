@@ -48,7 +48,7 @@ public:
     }
     
     virtual void gather_events(EA& ea) {
-    };
+    }
 };
 
 LIBEA_CMDLINE_INSTANCE(logic9_type, cli);
