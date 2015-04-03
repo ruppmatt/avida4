@@ -20,8 +20,6 @@ SET(LIBRARY_OUTPUT_PATH
    )
 
 
-ADD_SUBDIRECTORY(libs/ealib)
-ADD_SUBDIRECTORY(libs/boost)
 ADD_SUBDIRECTORY(avida4-core)
 
 # Default location for installed software/configs is the build directory
@@ -30,6 +28,25 @@ SET(CMAKE_INSTALL_PREFIX
    CACHE PATH
    "Install path prefix, prepended onto all install directories."
    FORCE
+   )
+
+
+# Because we're going to be using our own build system
+# to compile these libraries, we will have to rely on
+# keeping as much of the CMake infastructure on the
+# source branch that we directly maintain.
+
+SET(EALIB_SOURCE_ROOT
+   "${PROJECT_BINARY_DIR}../libs/ealib"
+   CACHE PATH
+   "Location of the ealib submodule"
+   )
+
+
+SET(BOOST_SOURCE_ROOT
+   "${PROJECT_BINARY_DIR}../libs/boost"
+   CACHE PATH
+   "Location of the main boost submodule"
    )
 
 
