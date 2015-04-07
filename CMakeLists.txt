@@ -1,6 +1,8 @@
+include(ExternalProject)
+
 PROJECT(avida4)
 
-CMAKE_MINIMUM_REQUIRED(VERSION 3.0)
+CMAKE_MINIMUM_REQUIRED(VERSION 3.0.2)
 
 
 # Final software is built in the cbuild directory
@@ -20,7 +22,7 @@ SET(LIBRARY_OUTPUT_PATH
    )
 
 
-ADD_SUBDIRECTORY(avida4-core)
+#ADD_SUBDIRECTORY(avida4-core)
 
 # Default location for installed software/configs is the build directory
 SET(CMAKE_INSTALL_PREFIX
@@ -36,17 +38,38 @@ SET(CMAKE_INSTALL_PREFIX
 # keeping as much of the CMake infastructure on the
 # source branch that we directly maintain.
 
-SET(EALIB_SOURCE_ROOT
-   "${PROJECT_BINARY_DIR}../libs/ealib"
-   CACHE PATH
-   "Location of the ealib submodule"
+SET(EXTERNAL_LIBRARY_OUTPUT_PATH
+   ${PROJECT_BINARY_DIR}
    )
 
+get_filename_component(BOOST_SRC_ROOT "libs/boost" ABSOLUTE)
 
-SET(BOOST_SOURCE_ROOT
-   "${PROJECT_BINARY_DIR}../libs/boost"
-   CACHE PATH
-   "Location of the main boost submodule"
+
+# These have to be manually synchrnoized with the Boost
+# libraries required to build ealib.  Presently, these
+# libraries are located:
+# libs/ealib/libea/Jamfile
+# which is the Jamfile.v2 used by the b2 build system.
+SET(EALIB_BOOST_LIBRARIES
+   serialization
+   iostreams
+   regex
+   system
+   filesystem
+   program_options
    )
+
+# Now convert our list into a comma separated string for boost's 
+# configuration (bootstrap) step
+string(REPLACE ";" "," WITH_BOOST_LIBS "${EALIB_BOOST_LIBRARIES}")
+
+ExternalProject_Add(local_boost
+   SOURCE_DIR ../libs/boost
+   CONFIGURE_COMMAND cd ${BOOST_SRC_ROOT} && pwd && ./bootstrap.sh 
+      --prefix=${EXTERNAL_LIBRARY_OUTPUT_PATH} 
+      --with-libraries=${WITH_BOOST_LIBS}
+   BUILD_COMMAND cd ${BOOST_SRC_ROOT} && ./b2 
+   INSTALL_COMMAND cd ${BOOST_SRC_ROOT} && ./b2 install
+)
 
 

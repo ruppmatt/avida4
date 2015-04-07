@@ -1,11 +1,18 @@
 #!/bin/sh
 
+mkdir -p cbuild
+
 git submodule init
 git submodule update
 
-mkdir -p cbuild
+pushd libs/boost 
+git submodule init
+echo "Getting boost submodules.  This may take a while..."
+git submodule update 
+popd 
+
 cd cbuild
-#cmake ../
-#make -j10 install
+cmake ../
+make 
 
 
