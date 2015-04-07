@@ -68,7 +68,7 @@ ExternalProject_Add(local_boost
    CONFIGURE_COMMAND cd ${BOOST_SRC_ROOT} && pwd && ./bootstrap.sh 
       --prefix=${EXTERNAL_LIBRARY_OUTPUT_PATH} 
       --with-libraries=${WITH_BOOST_LIBS}
-   BUILD_COMMAND cd ${BOOST_SRC_ROOT} && ./b2 
+   BUILD_COMMAND cd ${BOOST_SRC_ROOT} && ./b2 headers && ./b2 link=static 
    INSTALL_COMMAND cd ${BOOST_SRC_ROOT} && ./b2 install
 )
 

@@ -1,18 +1,54 @@
-#!/bin/sh
+#!/bin/bash
 
+# A little function to echo the success of our last command
+function echo_status(){
+   if [ $? -eq 0 ]; then
+      echo "[Success]"
+   else
+      echo "[Error: Check log]"
+   fi
+}
+
+# Identify where our build log will be
+cwd=`pwd`
+log="${cwd}/cbuild/build.log"
+
+# Create build directory and initialize log
+echo -n "Creating cbuild directory if needed..."
 mkdir -p cbuild
+echo_status
+rm -f ${log}
 
-git submodule init
-git submodule update
+# Initialize and Update Avida4 submodules
+echo -n "Initializing avida4 submodules..."
+git submodule init >> ${log} 2>&1
+echo_status
+echo -n "Updating avida4 submodules..."
+git submodule update >> ${log} 2>&1
+echo_status
 
-pushd libs/boost 
-git submodule init
-echo "Getting boost submodules.  This may take a while..."
-git submodule update 
-popd 
+# Initialize and Update Boost submodules
+pushd libs/boost > /dev/null
+echo -n "Initializing boost submodules..."
+git submodule init >> ${log} 2>&1
+echo_status
+echo -n "Updating boost submodules.  Be patient..."
+git submodule update >> ${log} 2>&1
+echo_status
+popd > /dev/null 
 
+
+# Begin cmake material
 cd cbuild
-cmake ../
-make 
+echo -n "Configuring..."
+cmake .. >> ${log} 2>&1
+echo_status
+echo -n "Building. This *will* take quite a while..."
+make >> ${log} 2>&1
+echo_status
+#echo -n "Installing..."
+#make install >> ${log} 1>&2
+#echo_status
+
 
 
