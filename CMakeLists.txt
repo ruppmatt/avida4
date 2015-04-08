@@ -2,9 +2,6 @@ include(ExternalProject)
 
 PROJECT(avida4)
 
-CMAKE_MINIMUM_REQUIRED(VERSION 3.0.2)
-
-
 # Final software is built in the cbuild directory
 SET(EXECUTABLE_OUTPUT_PATH
    ${PROJECT_BINARY_DIR}/bin
